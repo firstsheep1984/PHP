@@ -1,0 +1,38 @@
+
+  {% extends "main.html" %}
+
+  {% block page_title %}
+  
+   Add task
+  
+  
+  {% endblock %}
+  
+  {% block content %}
+  <div class="py-3 bg-secondary">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <img class="d-none d-md-block my-3 img-fluid" src="images/dont-forget.png">
+        </div>
+        <div class="col-md-7">
+          <h1>Add a New Task to Your List of Things That You Need to Not Forget</h1>
+          <form action="update.php" method="POST" >
+            <div class="form-group">
+              <label>Task Name</label>
+              <input type="text" name="name" class="form-control is-invalid" placeholder="">
+              <div class="invalid-feedback"> {{message}} </div>
+            </div>
+            <div class="form-group">
+              <label>Description of your task</label>
+              <textarea class="form-control" rows="3" name="description"></textarea>
+              <input type="hidden" name="createtask" value="createtask">
+            </div>
+            <button type="submit" class="btn btn-info mt-2">Save Task</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

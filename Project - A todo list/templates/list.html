@@ -1,0 +1,67 @@
+{% extends "main.html" %}
+
+{% block page_title %}
+
+ To do List
+
+
+{% endblock %}
+
+{% block content %}
+  <div class="py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2>List of All the Tasks I Need to Not Forget About</h2>
+          <hr class="my-1"> </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 p-3">
+          <table class="table table-compact table-hover table-striped table-bordered">
+            <tbody>
+            
+{% if list|length >0%}
+
+            {% for task in list %}
+            
+           <tr>
+                <td {% if task.completed== 1 %}class="completed text-muted"{% endif %}>
+                  <h4 class="mb-1">{{task.name}}
+                    <small class="text-muted">{{task.date_added}}</small>
+                  </h4>
+                  <p class="mb-0">{{task.description}}&nbsp;</p>
+                </td>
+                <td class="text-right">
+                  <form  action="update.php" method="POST" class="m-0">
+                      {% if task.completed == 0 %}
+                    <input type="submit" name='completed' class="btn btn-success btn-sm mb-1" value="Completed">
+                    {% endif %}
+                 {% if  is_logged_in %}
+                    <input type="submit" name='delete'  class="btn btn-warning btn-sm  mb-1" value="Delete">
+                   
+                  {% endif %}  
+                    <input type="hidden" name='id' value={{task.id}}>
+                   </form>
+                </td>
+              </tr>
+             {% endfor %}
+    {% else %}    
+           
+    <tr>
+        <td >
+          <h4 class="mb-1">No task in to do list
+           
+          </h4>
+          <p class="mb-0">Add a task into to do list &nbsp;</p>
+        </td>
+        
+      </tr>
+  {% endif %}     
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
